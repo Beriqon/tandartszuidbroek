@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://tandartszuidbroek.nl
+
+# Sitemaps
+Sitemap: https://tandartszuidbroek.nl/sitemap.xml
