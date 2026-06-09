@@ -55,7 +55,7 @@ export function TeamStrip({ title, intro, members }: TeamStripProps) {
                     ) : (
                       <div
                         aria-hidden
-                        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-secondary to-accent text-3xl font-semibold text-primary/70"
+                        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-secondary text-3xl font-semibold text-primary/70"
                       >
                         {m.name.charAt(0)}
                       </div>

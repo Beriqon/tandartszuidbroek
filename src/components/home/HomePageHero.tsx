@@ -76,20 +76,17 @@ export function HomePageHero() {
       <div className="relative z-10 mx-auto flex min-h-[min(100svh,52rem)] w-full max-w-screen-2xl flex-col px-gutter pb-8 pt-[clamp(1rem,2.25vw,2.5rem)] max-lg:min-h-[min(100dvh,46rem)] sm:pb-10 lg:min-h-[min(100svh,52rem)] lg:pt-[calc(var(--site-header-desktop-stack)+clamp(4.25rem,5.5vw,4.85rem))]">
         <div className="ml-0 flex max-w-xl flex-col py-1.5 sm:ml-[min(3vw,2rem)] sm:max-w-2xl sm:py-2 md:ml-[min(5vw,3.5rem)] lg:ml-[min(7vw,6rem)] lg:max-w-[34rem] lg:py-2.5 xl:ml-[min(9vw,8rem)]">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-foreground/80 sm:text-[0.75rem]">
-            Tandarts Apeldoorn • Gezinsmondzorg • Preventie
+            Tandarts Apeldoorn • Kwaliteit • Specialisaties
           </p>
           <h1
             id="home-hero-heading"
             className="mt-2 font-serif font-semibold leading-[1.04] tracking-tight text-foreground sm:leading-[1.03] lg:leading-[1.02]"
           >
             <span className="block text-[clamp(1.85rem,6.5vw,2.35rem)] sm:text-[2.65rem] md:text-[2.95rem] lg:text-[3.2rem]">
-              Uw glimlach
-            </span>
-            <span className="block text-[clamp(1.85rem,6.5vw,2.35rem)] sm:text-[2.65rem] md:text-[2.95rem] lg:text-[3.2rem]">
-              is onze zorg.
+              Wat mooi is
             </span>
             <span className="mt-1.5 block text-[clamp(1.85rem,6.5vw,2.35rem)] italic text-primary sm:text-[2.65rem] md:text-[2.95rem] lg:text-[3.2rem]">
-              Elke dag weer.
+              moet mooi blijven!
             </span>
             <span className="mt-6 block border-t border-border/50 pt-5 text-[1.05rem] font-medium tracking-tight text-foreground/80 sm:mt-7 sm:pt-6 sm:text-lg md:text-[1.15rem]">
               {name}
@@ -103,8 +100,7 @@ export function HomePageHero() {
           </div>
 
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed">
-            Op de {address.street} in Apeldoorn (wijk Zuidbroek). Moderne mondzorg voor
-            het hele gezin — persoonlijk en rustig.
+            Op de {address.street} in Apeldoorn. Kwalitatieve mondzorg met specialisaties.
           </p>
 
           <div className="mt-6 sm:mt-7">

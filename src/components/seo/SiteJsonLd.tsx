@@ -39,7 +39,7 @@ export async function SiteJsonLd() {
       settings?.defaultSeo?.metaDescription ??
       settings?.tagline ??
       siteConfig.tagline,
-    url: "https://tandartszuidbroek.nl",
+    url: siteConfig.url,
     telephone: phone,
     email,
     address: {

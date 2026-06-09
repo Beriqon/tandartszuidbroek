@@ -1,33 +1,57 @@
-/** Logo zonder witte achtergrond (`public/logo/`). */
-const LOGO_REMOVEBG_SRC = "/logo/logotzuidbroek-removebg-preview.png" as const;
+/** Logo-icoon (`public/logo/`). */
+const LOGO_ICON_SRC = "/logo/sanadens-icon.png" as const;
+
+export type OpeningHoursRow = {
+  label: string;
+  slots: readonly string[];
+};
+
+export const openingHours: readonly OpeningHoursRow[] = [
+  { label: "Ma–wo", slots: ["07:30–17:00", "18:00–21:00"] },
+  { label: "Do", slots: ["07:30–17:00"] },
+  { label: "Vr", slots: ["07:30–16:10"] },
+] as const;
+
+/** Eénregelige samenvatting (header-fallback, SEO). */
+export function formatOpeningHoursSummary(
+  rows: readonly OpeningHoursRow[] = openingHours,
+): string {
+  return rows
+    .map(({ label, slots }) => `${label} ${slots.join(" & ")}`)
+    .join("; ");
+}
 
 export const siteConfig = {
-  name: "Tandartspraktijk Zuidbroek",
-  /** Header: zelfde remove-bg logo als elders. */
-  logoSrc: LOGO_REMOVEBG_SRC,
-  /** Footer (zelfde bron als `logoSrc`). */
-  logoFooterSrc: LOGO_REMOVEBG_SRC,
-  tagline: "Tandzorg voor het hele gezin in Apeldoorn.",
-  phoneDisplay: "055 301 3488",
-  phoneTel: "+31553013488",
-  email: "info@tandartszuidbroek.nl",
+  url: "https://sanadens.nl",
+  name: "Tandartspraktijk Sanadens",
+  logoIconSrc: LOGO_ICON_SRC,
+  brandTitle: "Sanadens",
+  brandSubtitle: "praktijk voor tandheelkunde",
+  logoSrc: LOGO_ICON_SRC,
+  logoFooterSrc: LOGO_ICON_SRC,
+  tagline: "Kwalitatieve tandzorg in Apeldoorn.",
+  phoneDisplay: "055 366 4924",
+  phoneTel: "+31553664924",
+  email: "info@sanadens.nl",
   address: {
-    street: "Distelvlinderlaan 44",
-    postal: "7323 XA",
+    street: "Pythagorasstraat 4",
+    postal: "7323 HE",
     city: "Apeldoorn",
   },
+  kvk: "08225663",
+  krtNote:
+    "Sanadens staat geregistreerd in het Kwaliteitsregister Tandartsen (KRT)",
   /**
    * Optioneel: volledige iframe-src van Google Maps (Profiel → Delen → Kaart insluiten).
    * Laat leeg: de homepage bouwt automatisch een embed op basis van het adres.
    */
   googleMapsEmbedSrc: null as string | null,
-  openingHours: "Maandag t/m vrijdag 08:00–17:00",
+  openingHours,
   /** Telefonisch bereikbaar (aanvullend op praktijkuren). */
-  phoneHours:
-    "Telefonisch: ma–do 08:00–12:30 en 13:15–16:00, vrijdag 08:00–12:30",
-  /** Google Zoeken → lokale reviews (opent in nieuw tabblad). */
+  phoneHours: "Tijdens kantooruren: bel de praktijk (055 366 4924)",
+  /** Google → patiëntenreviews (opent in nieuw tabblad). */
   googleReviewsUrl:
-    "https://www.google.com/search?sa=X&sca_esv=89f358ba4e2fcd04&hl=en-NL&sxsrf=ANbL-n7jFYJ2F9a2PxhYTd9uHzN5yum_UA:1778546807264&q=Tandartspraktijk+Zuidbroek+Reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2Nja2MDU3t7CwMDA0NDawMLcw3cDI-IpRKSQxLyWxqKS4oCgxuyQzK1shqjQzJakoPzVbISi1LDO1vHgRKxGKAJVd5ERkAAAA&rldimm=3338577888011308785&tbm=lcl&ved=2ahUKEwjoh6eVw7KUAxXd9LsIHRpHISEQ9fQKegQIRRAG&biw=1536&bih=730&dpr=1.25#lkt=LocalPoiReviews",
+    "https://www.google.com/search?q=Sanadens+Praktijk+Voor+Tandheelkunde+Reviews&rflfq=1&stick=H4sIAAAAAAAAAONgkxIxNDI2NzYzNjW2NLU0NrQ0MzE3s9jAyPiKUSc4MS8xJTWvWCGgKDG7JDMrWyEsP79IISQxLyUjNTUnuzQvJVUhKLUsM7W8eBErScoBHBWOyXkAAAA&rldimm=12373635395931964768&tbm=lcl&hl=nl#lkt=LocalPoiReviews",
   /** Subtiele footer­credit (ontwerp). Zet `url` op een string om te linken. */
   designStudio: { name: "BeriQon", url: null as string | null },
 } as const;

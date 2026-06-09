@@ -15,38 +15,91 @@ type TeamGroup = {
   id: string;
   title: string;
   short: string;
+  description: string;
   members: readonly HomeTeamMember[];
 };
 
-function buildTeamGroups(members: readonly HomeTeamMember[]): TeamGroup[] {
-  const tandartsen = members.filter((m) => m.role === "Tandarts");
-  const mondhygienisten = members.filter(
-    (m) => m.role === "Mondhygiëniste" || m.role === "Mondhygiënist",
-  );
-  const tandartsAssistenten = members.filter((m) => m.role.includes("Tandarts-assistent"));
-  const preventieAssistenten = members.filter((m) => m.role.startsWith("Preventie"));
+const TEAM_GROUP_DEFS: readonly {
+  id: string;
+  title: string;
+  short: string;
+  description: string;
+  match: (member: HomeTeamMember) => boolean;
+}[] = [
+  {
+    id: "team-tandartsen",
+    title: "Tandartsen",
+    short: "Tandartsen",
+    description:
+      "Onze tandartsen zijn BIG-geregistreerd en staan voor u klaar voor controles, behandelingen en het beantwoorden van uw vragen.",
+    match: (m) => m.role === "Tandarts" || m.role.includes("werkend tandarts"),
+  },
+  {
+    id: "team-tandtechnieker",
+    title: "Tandtechnieker",
+    short: "Tandtechnieker",
+    description:
+      "Onze tandtechnieker verzorgt protheses en andere tandtechnische werkzaamheden voor een passend en comfortabel resultaat.",
+    match: (m) => m.role.includes("tandprotheticus") || m.role.includes("Tandtechnieker"),
+  },
+  {
+    id: "team-praktijkmanager",
+    title: "Praktijkmanager",
+    short: "Praktijkmanager",
+    description:
+      "De praktijkmanager coördineert de dagelijkse gang van zaken en is uw aanspreekpunt voor organisatorische vragen.",
+    match: (m) => m.role === "Praktijkmanager",
+  },
+  {
+    id: "team-mondhygienisten",
+    title: "Mondhygiënisten",
+    short: "Mondhygiënisten",
+    description:
+      "Mondhygiënisten richten zich op gezond tandvlees, preventie en professionele reiniging.",
+    match: (m) => m.role.includes("Mondhygiën"),
+  },
+  {
+    id: "team-balieassistentes",
+    title: "Balieassistentes",
+    short: "Balie",
+    description:
+      "Balieassistentes verwelkomen u aan de balie, plannen afspraken in en helpen u met praktische vragen.",
+    match: (m) => m.role.includes("Balie"),
+  },
+  {
+    id: "team-preventie",
+    title: "Preventieassistentes",
+    short: "Preventie",
+    description:
+      "Preventieassistentes helpen vooral jonge patiënten op weg met poetsinstructie en begeleiding.",
+    match: (m) => m.role.includes("Preventie"),
+  },
+  {
+    id: "team-tandartsassistenten",
+    title: "Tandartsassistentes",
+    short: "Tandartsassistent",
+    description:
+      "Tandartsassistentes ondersteunen de tandartsen tijdens behandelingen en zorgen dat uw bezoek soepel verloopt.",
+    match: (m) => m.role.includes("Tandarts-assistent"),
+  },
+  {
+    id: "team-omloopassistente",
+    title: "Omloopassistente",
+    short: "Omloop",
+    description:
+      "Omloopassistentes ondersteunen op verschillende plekken in de praktijk en zorgen dat alles soepel blijft lopen.",
+    match: (m) => m.role.includes("Omloop"),
+  },
+];
 
-  return [
-    { id: "team-tandartsen", title: "Tandartsen", short: "Tandartsen", members: tandartsen },
-    {
-      id: "team-mondhygienisten",
-      title: "Mondhygiënisten",
-      short: "Mondhygiënisten",
-      members: mondhygienisten,
-    },
-    {
-      id: "team-tandartsassistenten",
-      title: "Tandarts-assistenten",
-      short: "Assistenten",
-      members: tandartsAssistenten,
-    },
-    {
-      id: "team-preventie",
-      title: "Preventie-assistenten",
-      short: "Preventie",
-      members: preventieAssistenten,
-    },
-  ].filter((g) => g.members.length > 0);
+function buildTeamGroups(members: readonly HomeTeamMember[]): TeamGroup[] {
+  return TEAM_GROUP_DEFS.map((def) => ({
+    id: def.id,
+    title: def.title,
+    short: def.short,
+    description: def.description,
+    members: members.filter(def.match),
+  })).filter((g) => g.members.length > 0);
 }
 
 function TeamPortraitCard({ member }: { member: HomeTeamMember }) {
@@ -155,7 +208,8 @@ export function TeamStaticPage() {
                 Maak kennis met ons team
               </h1>
               <p className="mt-3 text-lg font-medium leading-snug text-foreground/85 sm:mt-3.5 sm:text-xl sm:leading-snug">
-                Tandartsen, mondhygiënisten en assistenten — samen zorgen we voor uw mondgezondheid.
+                Ervaren professionals met ieder hun eigen specialisatie — samen zorgen we voor
+                kwalitatief goede tandzorg.
               </p>
               <p className="mt-3 text-lg leading-relaxed text-muted-foreground sm:mt-4 sm:text-xl sm:leading-relaxed">
                 Achter elke behandeling staat een team dat luistert, uitlegt en met u meedenkt. Hieronder vindt u iedereen op een rij. Sommige collega&apos;s hebben nog een algemene portretplek; hun foto volgt zodra die beschikbaar is — net als op de homepage.
@@ -286,13 +340,7 @@ export function TeamStaticPage() {
                         {group.title}
                       </h3>
                       <p className="mt-2 max-w-prose text-base leading-relaxed text-muted-foreground sm:text-[1.0625rem]">
-                        {group.id === "team-tandartsen"
-                          ? "Onze tandartsen zijn BIG-geregistreerd en staan voor u klaar voor controles, behandelingen en het beantwoorden van uw vragen."
-                          : group.id === "team-mondhygienisten"
-                            ? "Mondhygiënisten richten zich op gezond tandvlees, preventie en professionele reiniging."
-                            : group.id === "team-tandartsassistenten"
-                              ? "Assistenten ondersteunen de tandartsen en zorgen dat uw bezoek soepel verloopt."
-                              : "Preventie-assistenten helpen vooral jonge patiënten op weg met poetsinstructie en begeleiding."}
+                        {group.description}
                       </p>
                     </header>
                     <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -323,31 +371,31 @@ export function TeamStaticPage() {
             <div className="grid gap-6 md:grid-cols-2 md:items-stretch md:gap-8">
               <div
                 className={cn(
-                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-primary px-6 py-9 text-primary-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_70%,rgb(15_23_42))] ring-1 ring-black/10 sm:px-9 sm:py-11",
+                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-cta px-6 py-9 text-cta-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_20%,rgb(15_23_42))] ring-1 ring-primary/15 sm:px-9 sm:py-11",
                   "dark:ring-white/10",
                 )}
               >
                 <div
-                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/[0.12] blur-3xl"
+                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/50 blur-3xl"
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-black/[0.12] blur-2xl"
+                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-primary/[0.06] blur-2xl"
                   aria-hidden
                 />
 
                 <div className="relative flex flex-1 flex-col gap-5 sm:flex-row sm:gap-6">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-foreground/15 text-primary-foreground shadow-inner ring-1 ring-primary-foreground/20 sm:size-14">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/14 text-primary shadow-inner ring-1 ring-primary/15 sm:size-14">
                     <UserPlus className="size-6 sm:size-7" strokeWidth={2} aria-hidden />
                   </span>
                   <div className="min-w-0 space-y-3">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary-foreground/75">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary/85">
                       Nieuwe patiënt
                     </p>
                     <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl sm:leading-tight">
                       Wilt u zich inschrijven?
                     </h2>
-                    <p className="max-w-prose text-base leading-relaxed text-primary-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
+                    <p className="max-w-prose text-base leading-relaxed text-cta-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
                       We verwelkomen u graag in de praktijk. Vul het inschrijfformulier in of bel ons
                       voor een afspraak.
                     </p>

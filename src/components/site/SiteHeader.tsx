@@ -1,7 +1,6 @@
 "use client";
 
 import type { ComponentProps, FocusEvent } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +24,7 @@ import {
   X,
 } from "lucide-react";
 
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -35,7 +35,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { siteConfig, type NavItem } from "@/lib/site-config";
+import { formatOpeningHoursSummary, siteConfig, type NavItem } from "@/lib/site-config";
 
 const HEADER_RIGHT_HREFS = ["/spoed", "/inschrijven", "/contact"] as const;
 
@@ -100,7 +100,7 @@ function useAmsterdamOpeningStatus(): AmsterdamOpeningStatus {
     mounted,
     open,
     hint,
-    fallback: siteConfig.openingHours,
+    fallback: formatOpeningHoursSummary(siteConfig.openingHours),
   };
 }
 
@@ -187,24 +187,13 @@ function MobileHeaderOpeningLine({ status }: { status: AmsterdamOpeningStatus })
 
 function HeaderLogoLink({ className }: { className?: string }) {
   return (
-    <Link
-      href="/"
-      className={cn(
-        "flex shrink-0 items-center justify-center self-stretch rounded-bl-2xl rounded-tl-2xl border-r border-border/80 bg-white px-4 py-3.5 transition-opacity hover:opacity-90 sm:px-5 sm:py-4",
-        className
+    <BrandLogo
+      variant="desktop"
+      linkClassName={cn(
+        "flex shrink-0 items-center self-stretch rounded-bl-2xl rounded-tl-2xl border-r border-border/80 bg-white px-4 py-1.5 transition-opacity hover:opacity-90 sm:px-5 sm:py-2",
+        className,
       )}
-      aria-label={siteConfig.name}
-    >
-      <Image
-        src={siteConfig.logoSrc}
-        alt=""
-        width={200}
-        height={72}
-        className="h-[3.35rem] w-auto max-w-[10.5rem] object-contain object-center sm:h-14 sm:max-w-[12rem]"
-        sizes="(max-width: 1023px) 176px, 220px"
-        priority
-      />
-    </Link>
+    />
   );
 }
 
@@ -252,8 +241,8 @@ function LuxeNavDropdownRow({
       <Link
         href={href}
         className={cn(
-          "flex items-center gap-3.5 border-t border-white/15 bg-primary px-4 py-4 text-primary-foreground",
-          "transition-colors hover:bg-[color-mix(in_oklab,var(--color-primary)_88%,black)]"
+          "flex items-center gap-3.5 border-t border-primary/20 bg-primary/10 px-4 py-4 text-foreground",
+          "transition-colors hover:bg-primary/16"
         )}
       >
         <span
@@ -491,8 +480,8 @@ function DesktopRightLink({ href, children }: { href: string; children: string }
     <Link
       href={href}
       className={cn(
-        "inline-flex items-center gap-1 border-l border-primary-foreground/25 px-3.5 py-3 text-sm font-medium text-primary-foreground/95 transition-colors hover:text-white sm:text-[0.9375rem]",
-        active && "bg-black/10 text-white"
+        "inline-flex items-center gap-1 border-l border-border/60 px-3.5 py-3 text-sm font-medium text-foreground/90 transition-colors hover:text-primary sm:text-[0.9375rem]",
+        active && "bg-primary/[0.06] font-semibold text-primary"
       )}
     >
       {children}
@@ -523,7 +512,7 @@ function MobileSheetNav({ navItems }: { navItems: readonly NavItem[] }) {
       <div className="flex min-h-0 flex-1 flex-col">
         <div className="relative shrink-0 overflow-hidden border-b border-border/50 px-4 pb-5 pt-[max(3.25rem,calc(env(safe-area-inset-top)+2.5rem))] pr-16 sm:px-5 sm:pb-6">
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.12] via-transparent to-primary/[0.06]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.05] via-transparent to-primary/[0.02]"
             aria-hidden
           />
           <div className="relative flex items-center gap-3">
@@ -713,17 +702,10 @@ export function SiteHeader({ navItems }: { navItems: readonly NavItem[] }) {
         <div className="mx-auto max-w-screen-2xl px-gutter pb-2.5 pt-1 sm:pb-3 sm:pt-1.5">
           <div className="flex items-start justify-between gap-2 rounded-2xl border border-border/50 bg-card/92 px-3 py-2 shadow-[0_12px_40px_-14px_rgba(15,23,42,0.16)] ring-1 ring-black/[0.04] backdrop-blur-md supports-backdrop-filter:bg-card/88 sm:gap-3 sm:rounded-[1.35rem] sm:px-4 sm:py-2.5">
             <div className="min-w-0 flex-1">
-              <Link href="/" className="inline-flex shrink-0">
-                <Image
-                  src={siteConfig.logoSrc}
-                  alt={siteConfig.name}
-                  width={200}
-                  height={56}
-                  className="h-10 max-h-11 w-auto max-w-[min(100%,14rem)] object-contain object-left sm:h-11 sm:max-w-[min(100%,16rem)]"
-                  sizes="200px"
-                  priority
-                />
-              </Link>
+              <BrandLogo
+                variant="mobile"
+                linkClassName="inline-flex min-w-0 max-w-full"
+              />
               <MobileHeaderOpeningLine status={openingStatus} />
             </div>
             <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
@@ -795,7 +777,7 @@ export function SiteHeader({ navItems }: { navItems: readonly NavItem[] }) {
                 <HeaderOpeningLine status={openingStatus} />
               </div>
 
-              <div className="flex min-h-[3.15rem] flex-wrap items-stretch rounded-br-2xl bg-gradient-to-r from-white from-35% via-[color-mix(in_oklab,var(--color-primary)_18%,white)] to-primary sm:min-h-[3.35rem] sm:flex-nowrap">
+              <div className="flex min-h-[3.15rem] flex-wrap items-stretch rounded-br-2xl border-t border-primary/10 bg-gradient-to-r from-white via-[color-mix(in_oklab,var(--color-primary)_6%,white)] to-[color-mix(in_oklab,var(--color-primary)_14%,white)] sm:min-h-[3.35rem] sm:flex-nowrap">
                 <nav
                   className="flex min-w-0 flex-1 flex-wrap items-center gap-0 sm:flex-nowrap"
                   aria-label="Hoofdnavigatie"

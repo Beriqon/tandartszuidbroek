@@ -3,12 +3,22 @@ import { Briefcase, ChevronRight } from "lucide-react";
 
 import { VacatureApplicationForm } from "@/components/forms/VacatureApplicationForm";
 import { Reveal } from "@/components/sections/Reveal";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { vacatureListings } from "@/content/vacatures";
+import {
+  getOpenVacatures,
+  getVacatureListingsSorted,
+  isVacatureOpen,
+  openVacatureBadgeLabel,
+  vacatureDetailHref,
+} from "@/content/vacatures";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function VacaturesStaticPage() {
+  const openVacatures = getOpenVacatures();
+  const vacatureListings = getVacatureListingsSorted();
+
   return (
     <>
       <section
@@ -124,49 +134,88 @@ export function VacaturesStaticPage() {
                 id="vacatures-team-heading"
                 className="mt-2 font-serif text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
               >
-                Wij zijn op zoek naar teamgenoten
+                Functies in onze praktijk
               </h2>
               <p className="mt-3 text-base text-muted-foreground sm:text-lg">
-                Onderstaande profielen passen goed bij onze praktijk. Staat uw functie er niet bij?
-                Kies bij het formulier &ldquo;Open sollicitatie&rdquo;.
+                Hieronder leest u wat de verschillende functies inhouden.
+                {openVacatures.length > 0 ? (
+                  <>
+                    {" "}
+                    De functies{" "}
+                    <span className="font-medium text-foreground">
+                      {openVacatures.map((v) => v.title).join(" en ")}
+                    </span>{" "}
+                    hebben op dit moment een actuele vacature.
+                  </>
+                ) : null}{" "}
+                Staat uw functie er niet bij? Kies bij het formulier &ldquo;Open sollicitatie&rdquo;.
               </p>
             </div>
           </Reveal>
 
-          <ul className="mt-10 grid gap-6 sm:mt-12 md:grid-cols-3">
-            {vacatureListings.map((job) => (
-              <li key={job.id}>
-                <Reveal>
-                  <article
-                    className={cn(
-                      "flex h-full flex-col items-center rounded-2xl border border-border/50 px-6 py-8 text-center shadow-sm ring-1 ring-black/[0.03]",
-                      "bg-gradient-to-b from-secondary/55 to-secondary/25 dark:from-secondary/20 dark:to-secondary/10",
-                    )}
-                  >
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                      <Briefcase className="size-5" strokeWidth={2} aria-hidden />
-                    </span>
-                    <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary/90">
-                      Vacature
-                    </p>
-                    <h3 className="mt-2 font-heading text-xl font-bold text-foreground">{job.title}</h3>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem]">
-                      {job.description}
-                    </p>
-                    <Button
-                      asChild
-                      size="lg"
-                      className="mt-6 w-full max-w-[16rem] rounded-xl shadow-sm"
+          <ul className="mt-10 grid auto-rows-fr gap-6 sm:mt-12 md:grid-cols-3">
+            {vacatureListings.map((job) => {
+              const isOpen = isVacatureOpen(job.id);
+              const detailHref = vacatureDetailHref(job.id);
+
+              return (
+                <li key={job.id} className="h-full">
+                  <Reveal className="h-full">
+                    <article
+                      className={cn(
+                        "group/vacature relative flex h-full flex-col items-center rounded-2xl border px-6 py-8 text-center shadow-sm ring-1 ring-black/[0.03] transition-shadow",
+                        "hover:shadow-md focus-within:shadow-md",
+                        isOpen
+                          ? "border-primary/35 bg-gradient-to-b from-primary/[0.08] via-secondary/45 to-secondary/25 dark:from-primary/15 dark:via-secondary/20 dark:to-secondary/10"
+                          : "border-border/50 bg-gradient-to-b from-secondary/55 to-secondary/25 dark:from-secondary/20 dark:to-secondary/10",
+                      )}
                     >
-                      <a href="#sollicitatie-form" className="gap-1">
-                        Solliciteer hierboven
-                        <ChevronRight className="size-4 opacity-80" aria-hidden />
-                      </a>
-                    </Button>
-                  </article>
-                </Reveal>
-              </li>
-            ))}
+                      <Link
+                        href={detailHref}
+                        className="absolute inset-0 z-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                        aria-label={`Meer informatie over ${job.title}`}
+                      />
+                      {isOpen ? (
+                        <Badge className="pointer-events-none absolute right-4 top-4 z-10 rounded-lg bg-primary px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-primary">
+                          {openVacatureBadgeLabel}
+                        </Badge>
+                      ) : null}
+                      <span className="pointer-events-none relative z-10 flex size-11 items-center justify-center rounded-xl bg-primary/15 text-primary transition-colors group-hover/vacature:bg-primary/20">
+                        <Briefcase className="size-5" strokeWidth={2} aria-hidden />
+                      </span>
+                      <p className="pointer-events-none relative z-10 mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary/90">
+                        Functie
+                      </p>
+                      <h3 className="pointer-events-none relative z-10 mt-2 font-heading text-xl font-bold text-foreground transition-colors group-hover/vacature:text-primary">
+                        {job.title}
+                      </h3>
+                      <p className="pointer-events-none relative z-10 mt-3 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem]">
+                        {job.description}
+                      </p>
+                      <div className="relative z-10 mt-6 flex w-full max-w-[16rem] flex-col gap-2.5">
+                        <Button asChild size="lg" className="w-full rounded-xl shadow-sm" variant="outline">
+                          <Link href={detailHref} className="gap-1">
+                            {isOpen ? "Meer informatie" : "Over deze functie"}
+                            <ChevronRight className="size-4 opacity-80" aria-hidden />
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="lg"
+                          className="w-full rounded-xl shadow-sm"
+                          variant={isOpen ? "default" : "outline"}
+                        >
+                          <a href="#sollicitatie-form" className="gap-1">
+                            {isOpen ? "Solliciteer hierboven" : "Open sollicitatie"}
+                            <ChevronRight className="size-4 opacity-80" aria-hidden />
+                          </a>
+                        </Button>
+                      </div>
+                    </article>
+                  </Reveal>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

@@ -11,7 +11,7 @@ export function CtaBand({ heading, body, button }: CtaBandProps) {
     <section className="bg-section py-section">
       <div className="mx-auto w-full max-w-6xl px-gutter">
         <Reveal>
-          <div className="grid gap-6 rounded-lg bg-primary px-6 py-10 text-primary-foreground sm:px-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10 lg:py-12">
+          <div className="grid gap-6 rounded-lg border border-primary/15 bg-cta px-6 py-10 text-cta-foreground shadow-[0_20px_50px_-24px_color-mix(in_oklab,var(--color-primary)_18%,rgb(15_23_42))] sm:px-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10 lg:py-12">
             <div className="space-y-3">
               {heading ? (
                 <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -19,7 +19,7 @@ export function CtaBand({ heading, body, button }: CtaBandProps) {
                 </h2>
               ) : null}
               {body ? (
-                <p className="max-w-prose text-base leading-relaxed text-primary-foreground/85">
+                <p className="max-w-prose text-base leading-relaxed text-cta-foreground/85">
                   {body}
                 </p>
               ) : null}

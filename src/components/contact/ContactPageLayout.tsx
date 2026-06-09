@@ -18,6 +18,7 @@ import {
   googleMapsEmbedIframeSrc,
   googleMapsOpenPlaceUrl,
 } from "@/lib/google-maps";
+import { OpeningHoursList } from "@/components/site/OpeningHoursList";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -254,9 +255,10 @@ export function ContactPageLayout() {
                     </span>
                     <div className="min-w-0">
                       <h3 className="font-heading text-lg font-bold text-foreground">Openingstijden</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {siteConfig.openingHours}
-                      </p>
+                      <OpeningHoursList
+                        rows={siteConfig.openingHours}
+                        className="mt-2 text-sm text-muted-foreground"
+                      />
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {siteConfig.phoneHours}
                       </p>
@@ -294,6 +296,10 @@ export function ContactPageLayout() {
                           {siteConfig.email}
                         </a>
                       </p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        KvK{" "}
+                        <span className="font-medium text-foreground">{siteConfig.kvk}</span>
+                      </p>
                     </div>
                   </div>
                 </li>
@@ -319,6 +325,7 @@ export function ContactPageLayout() {
                           href={siteConfig.googleReviewsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          aria-label={`Google-reviews van ${siteConfig.name} (opent in nieuw tabblad)`}
                           className="inline-flex items-center gap-1.5"
                         >
                           Google-reviews
@@ -341,10 +348,9 @@ export function ContactPageLayout() {
                       <Bus className="size-5" strokeWidth={2} aria-hidden />
                     </span>
                     <div className="min-w-0">
-                      <h3 className="font-heading text-lg font-bold text-foreground">Openbaar vervoer</h3>
+                      <h3 className="font-heading text-lg font-bold text-foreground">Route & OV</h3>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        Lijnen 2 en 8 stoppen in de buurt van de praktijk. Zie Google Maps voor actuele
-                        dienstregeling en haltes.
+                        Plan uw route via Google Maps. Het adres staat op de kaart hiernaast.
                       </p>
                     </div>
                   </div>

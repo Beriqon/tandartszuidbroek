@@ -3,20 +3,20 @@ import { siteConfig } from "@/lib/site-config";
 
 export const trustPillars = [
   {
-    title: "Rust & tempo",
-    body: "Geen haastwerk: we plannen bewust en houden ruimte voor uw vragen.",
+    title: "Kwaliteit & zorg",
+    body: "Geregistreerd in het Kwaliteitsregister Tandartsen (KRT) — vakmanschap met persoonlijke aandacht.",
   },
   {
-    title: "Preventie eerst",
-    body: "Samen werken we aan gezond tandvlees en een sterk gebit voor later.",
+    title: "Specialisaties",
+    body: "Implantologie, endodontologie en meer — ervaren professionals voor complexe behandelingen.",
   },
   {
-    title: "Kinderen welkom",
-    body: "Wennen in kleine stappen — een praktijk die vertrouwd voelt.",
+    title: "Gewoon Gaaf",
+    body: "Preventieprogramma voor kinderen en jongeren van 0 tot 18 jaar — gezond gebit van jongs af aan.",
   },
   {
-    title: "Duidelijke uitleg",
-    body: "Heldere keuzes: wat we doen, waarom het helpt, en wat u zelf kunt doen.",
+    title: "Holistische aanpak",
+    body: "Uw gebit als weerslag van uw gezondheid — we kijken naar het totaalplaatje.",
   },
 ] as const;
 

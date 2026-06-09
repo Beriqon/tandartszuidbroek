@@ -135,7 +135,7 @@ export function TeamSpotlightCarousel({
                 "dark:bg-card/85 dark:ring-white/5 dark:hover:shadow-primary/12",
               )}
             >
-              <div className="relative w-full shrink-0 overflow-hidden bg-muted aspect-[4/5]">
+              <div className="relative w-full shrink-0 overflow-hidden bg-zinc-100 aspect-[4/5] dark:bg-zinc-800/50">
                 {m.imageSrc ? (
                   <Image
                     src={m.imageSrc}

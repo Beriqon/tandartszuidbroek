@@ -15,6 +15,16 @@ export function ptParagraphs(prefix: string, lines: string[]): PortableTextBlock
   return lines.map((line, i) => ptNormal(`${prefix}-${i}`, line));
 }
 
+export function ptBlockquote(key: string, text: string): PortableTextBlock {
+  return {
+    _type: "block",
+    _key: key,
+    style: "blockquote",
+    markDefs: [],
+    children: [{ _type: "span", _key: `${key}-s`, text, marks: [] }],
+  };
+}
+
 export function ptH2(key: string, text: string): PortableTextBlock {
   return {
     _type: "block",

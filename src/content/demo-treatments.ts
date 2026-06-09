@@ -35,6 +35,13 @@ const demoMeta = [
   },
   { _id: "demo-kronen-bruggen", slug: "kronen-en-bruggen", title: "Kronen en bruggen", order: 10 },
   { _id: "demo-chirurgie", slug: "chirurgie", title: "Chirurgie", order: 11 },
+  { _id: "demo-gewoon-gaaf", slug: "gewoon-gaaf", title: "Gewoon Gaaf", order: 12 },
+  {
+    _id: "demo-clear-correct",
+    slug: "clear-correct",
+    title: "Clear Correct",
+    order: 13,
+  },
 ] as const;
 
 const demo: DemoTreatment[] = demoMeta.map((m) => {

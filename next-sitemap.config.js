@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || "https://tandartszuidbroek.nl",
+  siteUrl: process.env.SITE_URL || "https://sanadens.nl",
   generateRobotsTxt: true,
   exclude: ["/studio", "/api/*"],
   additionalPaths: async (config) => {

@@ -5,7 +5,9 @@ import { HuisregelsStaticPage } from "@/components/onze-praktijk/HuisregelsStati
 import { OnzePraktijkStaticPage } from "@/components/onze-praktijk/OnzePraktijkStaticPage";
 import { KwaliteitKlachtenStaticPage } from "@/components/onze-praktijk/KwaliteitKlachtenStaticPage";
 import { TeamStaticPage } from "@/components/onze-praktijk/TeamStaticPage";
+import { VacatureDetailPage } from "@/components/onze-praktijk/VacatureDetailPage";
 import { VacaturesStaticPage } from "@/components/onze-praktijk/VacaturesStaticPage";
+import { getVacatureById, getVacatureDetailIds } from "@/content/vacatures";
 import { SectionRenderer } from "@/components/sections/SectionRenderer";
 import { CmsInnerPage } from "@/components/site/CmsInnerPage";
 import { buildPageMetadata } from "@/lib/build-page-metadata";
@@ -44,6 +46,7 @@ export async function generateStaticParams() {
     { rest: ["team"] },
     { rest: ["kwaliteit-en-klachten"] },
     { rest: ["vacatures"] },
+    ...getVacatureDetailIds().map((id) => ({ rest: ["vacatures", id] })),
   ];
   const seen = new Set(out.map((p) => (p.rest?.join("/") ?? "")));
   for (const p of staticRest) {
@@ -84,6 +87,13 @@ const STATIC_FALLBACKS = {
   },
 } as const;
 
+function vacatureDetailId(rest: string[] | undefined): string | null {
+  if (rest?.length === 2 && rest[0] === "vacatures" && getVacatureById(rest[1])) {
+    return rest[1];
+  }
+  return null;
+}
+
 function staticKey(rest: string[] | undefined): keyof typeof STATIC_FALLBACKS | null {
   if (!rest?.length) return "root";
   if (rest.length === 1 && rest[0] === "huisregels") return "huisregels";
@@ -108,15 +118,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const candidates = onzePraktijkSlugCandidates(rest);
   const page = ready ? await getPageBySlugFirstMatch(candidates) : null;
   const staticKind = staticKey(rest);
+  const detailId = vacatureDetailId(rest);
+  const vacature = detailId ? getVacatureById(detailId) : undefined;
   const fb = onzePraktijkFallbackCopy(rest);
   return buildPageMetadata({
     pathname: pathnameFor(rest),
     page,
     settings,
-    fallbackTitle: staticKind ? STATIC_FALLBACKS[staticKind].title : fb.title,
-    fallbackDescription: staticKind
-      ? STATIC_FALLBACKS[staticKind].description
-      : fb.body.slice(0, 160),
+    fallbackTitle: vacature
+      ? `Vacature ${vacature.title}`
+      : staticKind
+        ? STATIC_FALLBACKS[staticKind].title
+        : fb.title,
+    fallbackDescription: vacature
+      ? `${vacature.summary} Lees meer over werkzaamheden, uren en salaris bij Tandartspraktijk Sanadens.`
+      : staticKind
+        ? STATIC_FALLBACKS[staticKind].description
+        : fb.body.slice(0, 160),
   });
 }
 
@@ -126,7 +144,21 @@ export default async function OnzePraktijkPage({ params }: PageProps) {
   const candidates = onzePraktijkSlugCandidates(rest);
   const page = ready ? await getPageBySlugFirstMatch(candidates) : null;
   const staticKind = staticKey(rest);
+  const detailId = vacatureDetailId(rest);
+  const vacature = detailId ? getVacatureById(detailId) : undefined;
   const fb = onzePraktijkFallbackCopy(rest);
+
+  if (detailId && !vacature) {
+    notFound();
+  }
+
+  if (vacature) {
+    return (
+      <main className="flex flex-1 flex-col">
+        <VacatureDetailPage vacature={vacature} />
+      </main>
+    );
+  }
 
   if (staticKind) {
     const cmsSections = page?.sections ?? [];

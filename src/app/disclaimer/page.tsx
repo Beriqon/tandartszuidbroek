@@ -9,42 +9,44 @@ export const metadata: Metadata = {
   alternates: { canonical: "/disclaimer" },
 };
 
+const practiceName = siteConfig.name;
+
 const sections = [
   {
     title: "Informatie",
     paragraphs: [
-      "Tandartspraktijk Zuidbroek besteedt de uiterste zorg aan de betrouwbaarheid en actualiteit van de gegevens op haar website.  Onjuistheden en onvolledigheden kunnen echter voorkomen. De gebruiker draagt zelf verantwoording voor het controleren van de juistheid, volledigheid of bruikbaarheid van de informatie of voor overige inhoud die op deze site beschikbaar is.",
+      `${practiceName} besteedt de uiterste zorg aan de betrouwbaarheid en actualiteit van de gegevens op haar website. Onjuistheden en onvolledigheden kunnen echter voorkomen. De gebruiker draagt zelf verantwoording voor het controleren van de juistheid, volledigheid of bruikbaarheid van de informatie of voor overige inhoud die op deze site beschikbaar is.`,
     ],
   },
   {
     title: "Aansprakelijkheid",
     paragraphs: [
-      "Hoewel Tandartspraktijk Zuidbroek zich inspant om nauwkeurige en actuele informatie in deze website op te nemen, kunnen fouten of omissies zich voordoen. Tandartspraktijk Zuidbroek wijst uitdrukkelijk iedere aansprakelijkheid uit hoofde van niet-nakoming van een overeenkomst, onrechtmatige daad, risicoaansprakelijkheid of enige andere rechtsgrond af, voor alle directe, indirecte, incidentele, gevolg-, aanvullende en bijzondere schade, alsmede voor schade waaronder bedrijfs- en gevolgschade, die op enigerlei wijze voortvloeit uit of samenhangt met de toegang tot en het gebruik van deze, ongeacht of Tandartspraktijk Zuidbroek zich bewust was van de mogelijkheid (tot het zich voordoen) van dergelijke schade.",
-      "Zo aanvaardt Tandartspraktijk Zuidbroek derhalve onder andere geen aansprakelijkheid voor: het ononderbroken functioneren van deze website; sites die niet door Tandartspraktijk Zuidbroek worden onderhouden, ook al wordt daar door Tandartspraktijk Zuidbroek naar verwezen; (rechts)handelingen verricht louter op basis van informatie verstrekt op of via deze site; gevolgen van het niet of te laat ontvangen of verwerken naar Tandartspraktijk Zuidbroek gestuurde e-mail of andere elektronische berichten; gevolgen van het niet of te laat ontvangen of verwerken van aan Tandartspraktijk Zuidbroek gezonden e-mails.",
+      `Hoewel ${practiceName} zich inspant om nauwkeurige en actuele informatie in deze website op te nemen, kunnen fouten of omissies zich voordoen. ${practiceName} wijst uitdrukkelijk iedere aansprakelijkheid uit hoofde van niet-nakoming van een overeenkomst, onrechtmatige daad, risicoaansprakelijkheid of enige andere rechtsgrond af, voor alle directe, indirecte, incidentele, gevolg-, aanvullende en bijzondere schade, alsmede voor schade waaronder bedrijfs- en gevolgschade, die op enigerlei wijze voortvloeit uit of samenhangt met de toegang tot en het gebruik van deze, ongeacht of ${practiceName} zich bewust was van de mogelijkheid (tot het zich voordoen) van dergelijke schade.`,
+      `Zo aanvaardt ${practiceName} derhalve onder andere geen aansprakelijkheid voor: het ononderbroken functioneren van deze website; sites die niet door ${practiceName} worden onderhouden, ook al wordt daar door ${practiceName} naar verwezen; (rechts)handelingen verricht louter op basis van informatie verstrekt op of via deze site; gevolgen van het niet of te laat ontvangen of verwerken naar ${practiceName} gestuurde e-mail of andere elektronische berichten; gevolgen van het niet of te laat ontvangen of verwerken van aan ${practiceName} gezonden e-mails.`,
     ],
   },
   {
     title: "Hyperlinks",
     paragraphs: [
-      "Verwijzingen naar sites die niet door Tandartspraktijk Zuidbroek worden onderhouden zijn louter ter informatie van de bezoeker opgenomen. Hoewel Tandartspraktijk Zuidbroek uiterst selectief is ten aanzien van de sites waarnaar verwezen wordt, kan zij niet instaan voor de inhoud en het functioneren daarvan, noch voor de kwaliteit van eventuele producten en/of diensten die daarop worden aangeboden. Sites van derden die links bevatten naar onze website(s) worden en kunnen niet door ons worden gecontroleerd.",
+      `Verwijzingen naar sites die niet door ${practiceName} worden onderhouden zijn louter ter informatie van de bezoeker opgenomen. Hoewel ${practiceName} uiterst selectief is ten aanzien van de sites waarnaar verwezen wordt, kan zij niet instaan voor de inhoud en het functioneren daarvan, noch voor de kwaliteit van eventuele producten en/of diensten die daarop worden aangeboden. Sites van derden die links bevatten naar onze website(s) worden en kunnen niet door ons worden gecontroleerd.`,
     ],
   },
   {
     title: "E-mail",
     paragraphs: [
-      "Tandartspraktijk Zuidbroek garandeert niet dat naar haar gestuurde e-mails of andere elektronische berichten (tijdig) worden ontvangen en verwerkt.",
+      `${practiceName} garandeert niet dat naar haar gestuurde e-mails of andere elektronische berichten (tijdig) worden ontvangen en verwerkt.`,
     ],
   },
   {
     title: "Intellectueel eigendom",
     paragraphs: [
-      "De op deze website afgebeelde gegevens, waaronder begrepen afbeeldingen, knoppen, opmaak en teksten, grafisch materiaal, (handels)namen, logo’s, waren- en dienstmerken, zijn eigendom van of in licentie bij Tandartspraktijk Zuidbroek en worden beschermd door auteursrecht, merkenrecht en/of enig ander intellectueel eigendomsrecht. Deze kunnen uitsluitend gebruikt worden na voorafgaande toestemming door Tandartspraktijk Zuidbroek. De hiervoor genoemde rechten gaan op geen enkele wijze over op (rechts)personen die toegang krijgen tot deze site.",
+      `De op deze website afgebeelde gegevens, waaronder begrepen afbeeldingen, knoppen, opmaak en teksten, grafisch materiaal, (handels)namen, logo's, waren- en dienstmerken, zijn eigendom van of in licentie bij ${practiceName} en worden beschermd door auteursrecht, merkenrecht en/of enig ander intellectueel eigendomsrecht. Deze kunnen uitsluitend gebruikt worden na voorafgaande toestemming door ${practiceName}. De hiervoor genoemde rechten gaan op geen enkele wijze over op (rechts)personen die toegang krijgen tot deze site.`,
     ],
   },
   {
     title: "Softwarekwaliteit",
     paragraphs: [
-      "Tandartspraktijk Zuidbroek garandeert niet dat de informatie, software of ander materiaal dat via haar webpagina’s toegankelijk is, vrij zal zijn van virussen, wormen, paarden van Troje of andere schadelijke componenten.",
+      `${practiceName} garandeert niet dat de informatie, software of ander materiaal dat via haar webpagina's toegankelijk is, vrij zal zijn van virussen, wormen, paarden van Troje of andere schadelijke componenten.`,
     ],
   },
 ] as const;

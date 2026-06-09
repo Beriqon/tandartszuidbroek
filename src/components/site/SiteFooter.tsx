@@ -1,9 +1,28 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
+import { BrandLogo } from "@/components/site/BrandLogo";
+import { OpeningHoursList } from "@/components/site/OpeningHoursList";
+import { googleMapsDirectionsUrl } from "@/lib/google-maps";
 import { siteConfig, mainNav } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+
+const legalLinks = [
+  { label: "Algemene voorwaarden", href: "/algemene-voorwaarden" },
+  { label: "Betalingsvoorwaarden", href: "/betalingsvoorwaarden" },
+  { label: "Disclaimer", href: "/disclaimer" },
+  { label: "Huisregels", href: "/onze-praktijk/huisregels" },
+] as const;
+
+const sectionLabelClass =
+  "text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary";
+
+const footerLinkClass =
+  "font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline";
+
+const footerPanelClass = cn(
+  "rounded-2xl border border-border/45 bg-[color-mix(in_oklab,var(--color-muted)_22%,white)] p-5 shadow-sm ring-1 ring-black/[0.03] dark:bg-muted/35 dark:ring-white/[0.05] sm:p-6",
+);
 
 export function SiteFooter() {
   const { address, designStudio } = siteConfig;
@@ -29,7 +48,7 @@ export function SiteFooter() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_0%,color-mix(in_oklab,var(--color-primary)_6%,transparent),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_0%,color-mix(in_oklab,var(--color-primary)_3%,transparent),transparent_55%)]"
         aria-hidden
       />
 
@@ -37,156 +56,98 @@ export function SiteFooter() {
         Colofon en contact
       </h2>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-gutter py-11 sm:py-12 lg:py-14">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-4">
-            <Link
-              href="/"
-              className={cn(
-                "inline-flex rounded-xl border border-border/40 bg-white p-2.5 shadow-sm ring-1 ring-black/[0.04] transition-[border-color,box-shadow] hover:border-primary/25 hover:shadow-md dark:bg-card/80 dark:ring-white/[0.06]",
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-gutter py-10 sm:py-11 lg:py-12">
+        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-3">
+            <BrandLogo
+              variant="footer"
+              linkClassName={cn(
+                "inline-flex rounded-xl border border-border/40 bg-white p-3 shadow-sm ring-1 ring-black/[0.04] transition-[border-color,box-shadow] hover:border-primary/25 hover:shadow-md dark:bg-card/80 dark:ring-white/[0.06] sm:p-3.5",
               )}
-              aria-label={`${siteConfig.name} — naar homepage`}
-            >
-              <Image
-                src={siteConfig.logoFooterSrc}
-                alt=""
-                width={200}
-                height={72}
-                className="h-9 w-auto max-w-[10rem] object-contain object-left sm:h-10 sm:max-w-[11rem]"
-                sizes="(max-width: 640px) 160px, 200px"
-              />
-            </Link>
-            <p className="mt-5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary">
+            />
+            <p className="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary">
               Praktijk
             </p>
-            <p className="mt-2 font-serif text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-2xl">
+            <p className="mt-1.5 font-serif text-xl font-semibold leading-snug tracking-tight text-foreground sm:text-[1.35rem]">
               {siteConfig.name}
             </p>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem] sm:leading-relaxed">
-              {siteConfig.tagline} Zorgvuldige mondzorg en een rustige sfeer — voor jong en oud.
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              {siteConfig.tagline} Zorgvuldige mondzorg in een rustige sfeer.
+            </p>
+            <p className="mt-2 max-w-xs text-xs leading-relaxed text-muted-foreground sm:text-[0.8125rem]">
+              {siteConfig.krtNote}
             </p>
           </div>
 
-          <div className="grid gap-5 sm:gap-6 lg:col-span-8 lg:grid-cols-2">
-            <div
-              className={cn(
-                "rounded-2xl border border-border/45 bg-[color-mix(in_oklab,var(--color-muted)_22%,white)] p-5 shadow-sm ring-1 ring-black/[0.03] dark:bg-muted/35 dark:ring-white/[0.05]",
-              )}
-            >
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary">Contact</p>
-              <ul className="mt-4 flex flex-col gap-4 text-sm">
-                <li className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <MapPin className="size-4" strokeWidth={2} aria-hidden />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-foreground/85">Bezoekadres</p>
-                    <address className="not-italic leading-relaxed text-foreground/80">
+          <div className={cn(footerPanelClass, "min-w-0 lg:col-span-9")}>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6 xl:gap-8">
+              <div className="min-w-0">
+                <p className={sectionLabelClass}>Contact</p>
+                <ul className="mt-3 flex flex-col gap-2.5 text-sm">
+                  <li className="flex gap-2.5">
+                    <MapPin className="mt-0.5 size-3.5 shrink-0 text-primary" strokeWidth={2} aria-hidden />
+                    <address className="min-w-0 not-italic leading-snug text-foreground/85">
                       {address.street}
                       <br />
                       {address.postal} {address.city}
                     </address>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Phone className="size-4" strokeWidth={2} aria-hidden />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-foreground/85">Telefoon</p>
+                  </li>
+                  <li className="flex gap-2.5">
+                    <Phone className="mt-0.5 size-3.5 shrink-0 text-primary" strokeWidth={2} aria-hidden />
+                    <div className="min-w-0">
+                      <a
+                        className="font-medium text-primary underline-offset-4 transition-colors hover:underline"
+                        href={`tel:${siteConfig.phoneTel}`}
+                      >
+                        {siteConfig.phoneDisplay}
+                      </a>
+                      <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{siteConfig.phoneHours}</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-2.5">
+                    <Mail className="mt-0.5 size-3.5 shrink-0 text-primary" strokeWidth={2} aria-hidden />
                     <a
-                      className="font-medium text-primary underline-offset-4 transition-colors hover:underline"
-                      href={`tel:${siteConfig.phoneTel}`}
-                    >
-                      {siteConfig.phoneDisplay}
-                    </a>
-                    <p className="mt-1 text-xs leading-snug text-muted-foreground">{siteConfig.phoneHours}</p>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Mail className="size-4" strokeWidth={2} aria-hidden />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-foreground/85">E-mail</p>
-                    <a
-                      className="break-all font-medium text-primary underline-offset-4 transition-colors hover:underline"
+                      className="min-w-0 break-all font-medium text-primary underline-offset-4 transition-colors hover:underline"
                       href={`mailto:${siteConfig.email}`}
                     >
                       {siteConfig.email}
                     </a>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Clock className="size-4" strokeWidth={2} aria-hidden />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-foreground/85">Openingstijden</p>
-                    <p className="leading-relaxed text-foreground/80">{siteConfig.openingHours}</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                  </li>
+                </ul>
+              </div>
 
-            <div
-              className={cn(
-                "rounded-2xl border border-border/45 bg-[color-mix(in_oklab,var(--color-muted)_22%,white)] p-5 shadow-sm ring-1 ring-black/[0.03] dark:bg-muted/35 dark:ring-white/[0.05]",
-              )}
-            >
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
-                <div>
-                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary">Menu</p>
-                  <ul className="mt-3 flex flex-col gap-2 text-sm">
-                    {mainNav.map((item) => (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          className="font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <Clock className="size-3.5 text-primary" strokeWidth={2} aria-hidden />
+                  <p className={sectionLabelClass}>Openingstijden</p>
                 </div>
-                <div>
-                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary">Juridisch</p>
-                  <ul className="mt-3 flex flex-col gap-2 text-sm">
-                    <li>
-                      <Link
-                        href="/algemene-voorwaarden"
-                        className="font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                      >
-                        Algemene voorwaarden
+                <OpeningHoursList rows={siteConfig.openingHours} className="mt-3 text-sm" />
+              </div>
+
+              <div className="min-w-0">
+                <p className={sectionLabelClass}>Menu</p>
+                <ul className="mt-3 flex flex-col gap-1.5 text-sm">
+                  {mainNav.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className={footerLinkClass}>
+                        {item.label}
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        href="/betalingsvoorwaarden"
-                        className="font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                      >
-                        Betalingsvoorwaarden
+                  ))}
+                </ul>
+              </div>
+
+              <div className="min-w-0">
+                <p className={sectionLabelClass}>Juridisch</p>
+                <ul className="mt-3 flex flex-col gap-1.5 text-sm">
+                  {legalLinks.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className={footerLinkClass}>
+                        {item.label}
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        href="/disclaimer"
-                        className="font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                      >
-                        Disclaimer
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/onze-praktijk/huisregels"
-                        className="font-medium text-foreground/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
-                      >
-                        Huisregels
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -196,17 +157,24 @@ export function SiteFooter() {
       <div
         className={cn(
           "relative z-10 border-t border-border/40",
-          "bg-[color-mix(in_oklab,var(--color-muted)_12%,white)] py-5",
+          "bg-[color-mix(in_oklab,var(--color-muted)_12%,white)] py-4",
           "dark:border-border/50 dark:bg-muted/25",
         )}
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-gutter sm:gap-3">
-          <div className="flex w-full flex-col items-center gap-3 text-xs leading-relaxed text-muted-foreground sm:flex-row sm:items-start sm:justify-between sm:text-[0.8125rem]">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-3 px-gutter sm:gap-2.5">
+          <div className="flex w-full flex-col items-center gap-2.5 text-xs leading-relaxed text-muted-foreground sm:flex-row sm:items-start sm:justify-between sm:text-[0.8125rem]">
             <p className="text-center sm:max-w-[42%] sm:text-left">
               © {new Date().getFullYear()} {siteConfig.name}. Alle rechten voorbehouden.
             </p>
             <p className="text-center sm:max-w-[42%] sm:text-right">
-              Lijnen 2 en 8 stoppen nabij de praktijk.
+              <a
+                href={googleMapsDirectionsUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline-offset-4 transition-colors hover:underline"
+              >
+                Plan uw route via Google Maps.
+              </a>
             </p>
           </div>
           <p className="text-center text-xs font-normal tracking-[0.1em] text-muted-foreground/55 sm:text-[0.8125rem] sm:tracking-[0.09em]">

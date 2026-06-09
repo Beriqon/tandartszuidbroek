@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Tandartspraktijk in Apeldoorn-Zuidbroek: preventie, kindertandheelkunde en zorg op maat voor het hele gezin. Distelvlinderlaan 44.",
-  metadataBase: new URL("https://tandartszuidbroek.nl"),
+    "Kwalitatieve tandzorg in Apeldoorn. Specialisaties in implantologie, endodontologie en preventie. Pythagorasstraat 4.",
+  metadataBase: new URL(siteConfig.url),
 };
 
 export default function RootLayout({

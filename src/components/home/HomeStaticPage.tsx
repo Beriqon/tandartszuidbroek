@@ -17,6 +17,11 @@ import {
 } from "lucide-react";
 
 import { HomePageHero } from "@/components/home/HomePageHero";
+import {
+  HomeAangepasteOpeningstijdenInline,
+  HomeVacaturesSidebarCard,
+} from "@/components/home/HomeVisitActueelInfo";
+import { HomeVisitMapSticky } from "@/components/home/HomeVisitMapSticky";
 import { TeamSpotlightCarousel } from "@/components/home/TeamSpotlightCarousel";
 import { TreatmentsSpotlightCarousel } from "@/components/home/TreatmentsSpotlightCarousel";
 import { Reveal } from "@/components/sections/Reveal";
@@ -25,12 +30,13 @@ import { demoTreatmentSummaries } from "@/content/demo-treatments";
 import { homeTeamMembers } from "@/content/home-team";
 import { homePrimaryCta, trustPillars } from "@/content/home-static-data";
 import { googleMapsDirectionsUrl, googleMapsEmbedIframeSrc } from "@/lib/google-maps";
+import { OpeningHoursList } from "@/components/site/OpeningHoursList";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-const trustIcons = [Sparkles, Shield, Baby, MessageCircle] as const;
+const trustIcons = [Shield, Sparkles, Baby, MessageCircle] as const;
 
-const PRACTICE_EXTERIOR_IMAGE = "/homepagina/buitenkantzuidbroektandarts.jpg";
+const PRACTICE_EXTERIOR_IMAGE = "/homepagina/buitenkantsanadens.png";
 
 export function HomeStaticPage() {
   return (
@@ -42,15 +48,7 @@ export function HomeStaticPage() {
         aria-labelledby="home-about-heading"
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_15%_-10%,color-mix(in_oklab,var(--color-primary)_12%,transparent),transparent_55%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-section-muted/55"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-[min(40%,18rem)] top-1/4 size-[min(100vw,46rem)] rounded-full bg-primary/[0.045] blur-3xl"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_15%_-10%,color-mix(in_oklab,var(--color-primary)_4%,transparent),transparent_55%)]"
           aria-hidden
         />
 
@@ -59,7 +57,7 @@ export function HomeStaticPage() {
             <Reveal className="min-w-0">
               <div className="mx-auto max-w-2xl text-left lg:max-w-[42rem]">
                 <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.18em] text-primary/90 sm:text-sm">
-                  Praktijk in Zuidbroek
+                  Praktijk in Apeldoorn
                 </p>
                 <h2
                   id="home-about-heading"
@@ -68,10 +66,10 @@ export function HomeStaticPage() {
                   Mondzorg die past bij uw dagelijks leven
                 </h2>
                 <p className="mt-2 text-lg font-medium leading-snug text-foreground/85 sm:mt-2.5 sm:text-xl sm:leading-snug">
-                  We combineren vakmanschap met een nuchter gesprek: wat heeft u nodig, wat is verstandig, en wat kunt u zelf doen?
+                  We combineren vakmanschap met persoonlijke aandacht: wat heeft u nodig, wat is verstandig, en wat kunt u zelf doen?
                 </p>
                 <p className="mt-2.5 text-lg leading-snug text-muted-foreground sm:mt-3 sm:text-xl sm:leading-snug">
-                  In Apeldoorn-Zuidbroek werken we met vaste ritmes, duidelijke planning en aandacht voor kinderen, drukke agenda’s en patiënten die extra tijd willen. Geen ruis — wel zorg die u begrijpt.
+                  Sanadens is geregistreerd in het Kwaliteitsregister Tandartsen (KRT). Ons team van ervaren professionals biedt kwalitatieve mondzorg met specialisaties — van preventie tot complexe behandelingen.
                 </p>
                 <div className="mt-4 flex justify-start sm:mt-5">
                   <Button
@@ -164,7 +162,7 @@ export function HomeStaticPage() {
                       />
                     </a>
                     <p className="mt-4 border-t border-border/60 pt-4 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                      Gezinsmondzorg en preventie — dezelfde rust en duidelijkheid als bij uw eerste bezoek.
+                      Kwaliteit en specialisaties — met dezelfde aandacht als bij uw eerste bezoek.
                     </p>
                   </div>
                 </div>
@@ -242,7 +240,7 @@ export function HomeStaticPage() {
               </li>
               <li className="flex gap-3.5">
                 <span className="mt-2.5 size-2.5 shrink-0 rounded-full bg-primary sm:mt-3" />
-                Kindvriendelijk wennen en extra tijd bij spanning of angst.
+                Implantologie door erkende implantologen Bonthond en Dijkman.
               </li>
               <li className="flex gap-3.5">
                 <span className="mt-2.5 size-2.5 shrink-0 rounded-full bg-primary sm:mt-3" />
@@ -277,15 +275,11 @@ export function HomeStaticPage() {
 
       <section
         id="bezoek"
-        className="relative isolate overflow-hidden border-b border-border/60 bg-section-muted py-section"
+        className="relative isolate border-b border-border/60 bg-section-muted py-section"
         aria-labelledby="home-visit-heading"
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-25%,color-mix(in_oklab,var(--color-primary)_11%,transparent),transparent_58%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-section/40 via-transparent to-section-muted/45"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-25%,color-mix(in_oklab,var(--color-primary)_4%,transparent),transparent_58%)]"
           aria-hidden
         />
 
@@ -302,54 +296,56 @@ export function HomeStaticPage() {
                 Bezoek onze praktijk
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Centraal in Apeldoorn-Zuidbroek, goed bereikbaar met auto en openbaar vervoer.
+                Centraal in Apeldoorn, goed bereikbaar met auto en openbaar vervoer.
               </p>
             </Reveal>
           </div>
 
-          <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,22rem)] lg:items-start lg:gap-10 xl:gap-12">
-            <Reveal delay={0.06} className="min-w-0">
-              <div
-                className={cn(
-                  "overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[0_24px_60px_-28px_rgba(15,23,42,0.22)] ring-1 ring-black/[0.04]",
-                  "dark:ring-white/5",
-                )}
-              >
-                <div className="relative aspect-[16/11] min-h-[260px] w-full sm:aspect-[16/10] sm:min-h-[300px]">
-                  <iframe
-                    title={`Kaart: ${siteConfig.name}`}
-                    className="absolute inset-0 h-full w-full border-0"
-                    src={googleMapsEmbedIframeSrc()}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="flex flex-col gap-3 border-t border-border/60 bg-section-muted/90 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                  <span className="flex gap-3 text-sm leading-snug text-muted-foreground">
-                    <MapPin className="mt-0.5 size-[1.125rem] shrink-0 text-primary" aria-hidden />
-                    <span>
-                      {siteConfig.address.street}
-                      <br />
-                      <span className="font-medium text-foreground">
-                        {siteConfig.address.postal} {siteConfig.address.city}
+          <div className="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,22rem)] lg:gap-10 xl:gap-12">
+            <HomeVisitMapSticky>
+              <Reveal delay={0.06}>
+                <div
+                  className={cn(
+                    "overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[0_24px_60px_-28px_rgba(15,23,42,0.22)] ring-1 ring-black/[0.04]",
+                    "dark:ring-white/5",
+                  )}
+                >
+                  <div className="relative aspect-[16/11] min-h-[260px] w-full sm:aspect-[16/10] sm:min-h-[300px]">
+                    <iframe
+                      title={`Kaart: ${siteConfig.name}`}
+                      className="absolute inset-0 h-full w-full border-0"
+                      src={googleMapsEmbedIframeSrc()}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3 border-t border-border/60 bg-section-muted/90 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+                    <span className="flex gap-3 text-sm leading-snug text-muted-foreground">
+                      <MapPin className="mt-0.5 size-[1.125rem] shrink-0 text-primary" aria-hidden />
+                      <span>
+                        {siteConfig.address.street}
+                        <br />
+                        <span className="font-medium text-foreground">
+                          {siteConfig.address.postal} {siteConfig.address.city}
+                        </span>
                       </span>
                     </span>
-                  </span>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="shrink-0 gap-2 rounded-xl border-primary/25"
-                  >
-                    <a href={googleMapsDirectionsUrl()} target="_blank" rel="noopener noreferrer">
-                      <Navigation className="size-4" aria-hidden />
-                      Route plannen
-                    </a>
-                  </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="shrink-0 gap-2 rounded-xl border-primary/25"
+                    >
+                      <a href={googleMapsDirectionsUrl()} target="_blank" rel="noopener noreferrer">
+                        <Navigation className="size-4" aria-hidden />
+                        Route plannen
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </HomeVisitMapSticky>
 
             <ul className="flex min-w-0 flex-col gap-4">
               <Reveal delay={0.08}>
@@ -364,11 +360,18 @@ export function HomeStaticPage() {
                     </span>
                     <div className="min-w-0">
                       <h3 className="font-heading text-lg font-bold text-foreground">Openingstijden</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{siteConfig.openingHours}</p>
+                      <OpeningHoursList
+                        rows={siteConfig.openingHours}
+                        className="mt-2 text-sm text-muted-foreground"
+                      />
+                      <HomeAangepasteOpeningstijdenInline />
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{siteConfig.phoneHours}</p>
                     </div>
                   </div>
                 </li>
+              </Reveal>
+              <Reveal delay={0.09}>
+                <HomeVacaturesSidebarCard />
               </Reveal>
               <Reveal delay={0.1}>
                 <li
@@ -418,7 +421,7 @@ export function HomeStaticPage() {
                     <div className="min-w-0">
                       <h3 className="font-heading text-lg font-bold text-foreground">Route & OV</h3>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        Lijnen 2 en 8 stoppen nabij de praktijk. Het adres staat op de kaart hiernaast.
+                        Plan uw route via Google Maps. Het adres staat op de kaart hiernaast.
                       </p>
                     </div>
                   </div>
@@ -465,11 +468,7 @@ export function HomeStaticPage() {
 
       <section className="relative isolate overflow-hidden border-b border-border/60 bg-section-muted py-section">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_20%_-15%,color-mix(in_oklab,var(--color-primary)_10%,transparent),transparent_55%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-section/30 via-transparent to-primary/[0.04]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_20%_-15%,color-mix(in_oklab,var(--color-primary)_4%,transparent),transparent_55%)]"
           aria-hidden
         />
 
@@ -478,25 +477,25 @@ export function HomeStaticPage() {
               <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-8">
               <div
                 className={cn(
-                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-primary px-6 py-9 text-primary-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_70%,rgb(15_23_42))] ring-1 ring-black/10 sm:px-9 sm:py-11",
+                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-cta px-6 py-9 text-cta-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_20%,rgb(15_23_42))] ring-1 ring-primary/15 sm:px-9 sm:py-11",
                   "dark:ring-white/10",
                 )}
               >
                 <div
-                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/[0.12] blur-3xl"
+                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/50 blur-3xl"
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-black/[0.12] blur-2xl"
+                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-primary/[0.06] blur-2xl"
                   aria-hidden
                 />
 
                 <div className="relative flex flex-1 flex-col gap-5 sm:flex-row sm:gap-6">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-foreground/15 text-primary-foreground shadow-inner ring-1 ring-primary-foreground/20 sm:size-14">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/14 text-primary shadow-inner ring-1 ring-primary/15 sm:size-14">
                     <UserPlus className="size-6 sm:size-7" strokeWidth={2} aria-hidden />
                   </span>
                   <div className="min-w-0 space-y-3">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary-foreground/75">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary/85">
                       Nieuwe patiënten
                     </p>
                     {homePrimaryCta.heading ? (
@@ -505,7 +504,7 @@ export function HomeStaticPage() {
                       </h2>
                     ) : null}
                     {homePrimaryCta.body ? (
-                      <p className="max-w-prose text-base leading-relaxed text-primary-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
+                      <p className="max-w-prose text-base leading-relaxed text-cta-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
                         {homePrimaryCta.body}
                       </p>
                     ) : null}

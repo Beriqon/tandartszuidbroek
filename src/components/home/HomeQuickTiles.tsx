@@ -50,7 +50,7 @@ export function HomeQuickTiles() {
           const Icon = t.icon;
           const inner = (
             <>
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/20 shadow-sm">
                 <Icon className="size-5" aria-hidden />
               </span>
               <span className="min-w-0 flex-1">

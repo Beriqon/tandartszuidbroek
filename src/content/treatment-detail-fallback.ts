@@ -1,6 +1,6 @@
 import type { PortableTextBlock } from "@portabletext/types";
 
-import { ptBulletList, ptH2, ptParagraphs } from "@/content/portable-text-helpers";
+import { ptBlockquote, ptBulletList, ptH2, ptParagraphs } from "@/content/portable-text-helpers";
 
 export type TreatmentFallback = {
   excerpt: string;
@@ -141,20 +141,44 @@ const parodontologie: TreatmentFallback = {
 
 const implantologie: TreatmentFallback = {
   excerpt:
-    "Implantaten kunnen ontbrekende tanden of kiezen vervangen en dienen als steun voor kronen, bruggen of een overkappingsprothese — altijd na zorgvuldige planning en overleg.",
+    "Implantologie heeft tot doel één of meerdere tanden te vervangen door tandimplantaten — kunstwortels in het bot die dienen als basis voor een kroon, brug of gebitsprothese.",
   body: [
-    ptH2("im-h2-1", "Wat zijn implantaten?"),
+    ptH2("im-h2-1", "Wat is implantologie?"),
     ...ptParagraphs("im-p1", [
-      "Een implantoloog vervangt één of meerdere tanden door implantaten: kunstwortels die in het kaakbeen worden geplaatst en na genezing als fundament dienen voor vervangingen.",
-      "Deze implantaten kunnen na het plaatsen worden voorzien van een kroon, brug of een overkappingsprothese (bijvoorbeeld een klikgebit).",
+      "Implantologie heeft tot doel één of meerdere tanden te vervangen door tandimplantaten. Dit zijn kunstmatige wortels die in het bot geplaatst worden en die dienen als basis voor een kroon of als steun voor een gebitsprothese.",
+      "De meeste implantaten zien eruit als een soort schroefje en zijn gemaakt van titanium, een lichaamsvriendelijk materiaal waar bot makkelijk aan hecht.",
     ]),
-    ptH2("im-h2-2", "Wat komt aan bod in het traject?"),
+    ptH2("im-h2-2", "Onze eigen implantologen"),
+    ...ptParagraphs("im-p2", [
+      "Behalve algemeen practicus zijn tandarts Bonthond en tandarts Dijkman ook erkend en geregistreerd als implantoloog bij de Nederlandse beroepsvereniging van orale implantologen (NVOI).",
+      "Om goed op de hoogte te blijven van alle ontwikkelingen, volgen zij bij- en nascholing en wordt veel tijd besteed aan extra trainingen op het gebied van implantologie. Daardoor kunnen wij onze patiënten de meest moderne en beproefde technieken aanbieden.",
+    ]),
+    ptH2("im-h2-3", "Wat is een implantaat?"),
+    ...ptParagraphs("im-p3", [
+      "Een implantaat is een kunstwortel die in de kaak geplaatst wordt en na verloop van tijd in het bot vastgroeit. Het lijkt nog het meest op een schroef of holle cilinder. Met een doorsnede van 3,3 tot 4,8 millimeter en een lengte van 6 tot 14 millimeter zijn ze ongeveer net zo groot als een natuurlijke tandwortel.",
+      "Implantaten zijn meestal gemaakt van titanium dat zeer goed door het omringende bot en het lichaam wordt verdragen. Wanneer het bot voldoende aan de kunstwortel is vastgegroeid, kan het implantaat dienen als basis voor een kroon, een brug of als steun voor een gebitsprothese. Het plaatsen van één of meerdere implantaten heet implantatie.",
+    ]),
+    ptH2("im-h2-4", "Afspraak implantologisch consult"),
+    ...ptParagraphs("im-p4", [
+      "Wilt u meer informatie over implantaten? Maak dan een afspraak voor een implantologisch consult. Onze tandarts-implantoloog zoekt samen met u wat voor u de beste oplossing is en of er misschien alternatieven zijn.",
+      "Wanneer u geen patiënt bij ons bent, heeft u voor het maken van deze afspraak een verwijzing van uw eigen tandarts nodig.",
+    ]),
+    ptBlockquote("im-bq", "Wij adviseren u graag!"),
+    ...ptParagraphs("im-p5", [
+      "Voordat we één of meerdere implantaten bij u gaan plaatsen, doen we eerst een onderzoek. Op basis van het onderzoek ontvangt u van ons een begroting of plaatsen we een aanvraag bij uw zorgverzekeraar. Het klikgebit wordt overigens in veel gevallen voor een groot deel vergoed uit de basisverzekering.",
+      "Neem voor een implantologisch consult contact met ons op.",
+    ]),
+    ptH2("im-h2-5", "Informatie voor verwijzers"),
+    ...ptParagraphs("im-p6", [
+      "Wilt u uw patiënt verwijzen? Neem contact met ons op — wij helpen u graag met het verwijsformulier en de verdere afhandeling.",
+    ]),
+    ptH2("im-h2-6", "Wat komt aan bod in het traject?"),
     ...ptBulletList("im-bl", [
       "Medische en mondkundige geschiktheid, botvolume en alternatieven (zoals een brug of prothese)",
       "Planning, plaatsing, genezingsfase en belasting in stappen",
       "Nazorg: reiniging rond implantaten, controles en signalen om op te letten",
     ]),
-    ...ptParagraphs("im-p2", [
+    ...ptParagraphs("im-p7", [
       "Implantologie is maatwerk. We nemen de tijd om risico’s, kosten en verwachtingen helder te bespreken voordat er wordt gestart.",
     ]),
   ],
@@ -220,6 +244,57 @@ const kronenBruggen: TreatmentFallback = {
   ],
 };
 
+const gewoonGaaf: TreatmentFallback = {
+  excerpt:
+    "Gewoon Gaaf is een preventieprogramma voor kinderen van 0 tot 18 jaar: samen houden we het gebit vrij van tandbederf, vanaf het eerste tandje tot en met het 17e levensjaar.",
+  body: [
+    ptH2("gg-h2-1", "Preventie staat centraal"),
+    ...ptParagraphs("gg-p1", [
+      "Tandartspraktijk Sanadens heeft preventieve tandheelkunde hoog in het vaandel. Voorkomen is beter dan genezen — wij zijn ervan overtuigd dat met de juiste poets- en voedingsgewoonten het gebit een leven lang gezond kan blijven.",
+      "Gewoon Gaaf is een methode om de mond van kinderen tussen 0 en 18 jaar vrij te houden van tandbederf. Onze preventiemedewerkers werken hier dagelijks mee in de praktijk.",
+    ]),
+    ptH2("gg-h2-2", "Vanaf het eerste tandje"),
+    ...ptParagraphs("gg-p2", [
+      "Vanaf dat het eerste tandje doorbreekt, vragen wij u om uw kind mee te nemen naar onze praktijk. Wij leggen u als ouder of verzorger graag uit hoe u het kindergebit het beste kunt verzorgen — afgestemd op de poets- en voedingsgewoonten die bij uw kind passen.",
+      "Een bijkomend voordeel: uw kind raakt direct vertrouwd met poetsen en het bezoeken van de tandarts.",
+    ]),
+    ptH2("gg-h2-3", "Het eerste bezoek en het traject"),
+    ...ptBulletList("gg-bl", [
+      "Bij het eerste bezoek maken we een inschatting van de persoonlijke situatie aan de hand van een risicoscorelijst",
+      "Op basis daarvan bepalen we hoe vaak uw kind terugkomt voor preventieve zorg",
+      "Het Gewoon Gaaf-traject loopt tot en met het 17e levensjaar; veel behandelingen worden tot 18 jaar vergoed vanuit de basisverzekering",
+      "Naast het traject verwachten wij uw kind in principe twee keer per jaar voor een controle bij de tandarts",
+    ]),
+    ...ptParagraphs("gg-p3", [
+      "Zorgverzekeraars stellen voorwaarden aan vergoeding en hanteren soms maximale aantallen per jaar. In sommige gevallen is vooraf toestemming nodig — wij informeren u daarover. Heeft u vragen over Gewoon Gaaf? Neem gerust contact met ons op.",
+    ]),
+  ],
+};
+
+const clearCorrect: TreatmentFallback = {
+  excerpt:
+    "ClearCorrect aligners zijn bijna onzichtbare beugels op maat: stap voor stap naar een rechter gebit — uitneembaar, comfortabel en passend bij uw dagelijks leven.",
+  body: [
+    ptH2("cc-h2-1", "Onzichtbare aligners"),
+    ...ptParagraphs("cc-p1", [
+      "Wist u dat wij aligners — bijna onzichtbare beugels — aanbieden in onze praktijk? Met ClearCorrect kunnen wij uw tanden weer rechtzetten, waardoor u tegelijk een gezonder gebit krijgt.",
+      "Een aligner is een op maat gemaakt transparant hoesje dat op uw tanden en kiezen past. U draagt de aligner dag en nacht, behalve tijdens eten en tandenpoetsen.",
+    ]),
+    ptH2("cc-h2-2", "Hoe verloopt de behandeling?"),
+    ...ptBulletList("cc-bl", [
+      "Consult in de praktijk: foto’s, eventueel röntgenfoto’s en een 3D-scan of afdruk van uw gebit",
+      "Uw behandelplan wordt gemaakt in samenspraak met uw behandelaar en besproken tijdens een vervolgafspraak",
+      "Na goedkeuring worden de aligners gemaakt en bij u geplaatst",
+      "Na ongeveer twee weken wisselt u voor de volgende set; zo verplaatsen uw tanden stap voor stap",
+    ]),
+    ptH2("cc-h2-3", "Voordelen van ClearCorrect"),
+    ...ptParagraphs("cc-p2", [
+      "Het grootste voordeel is dat de aligner vrijwel onzichtbaar is. Daarnaast zijn aligners uitneembaar: u kunt uw gebit gewoon reinigen zoals u gewend bent en alles blijven eten. Orthodontie hoeft geen belemmering meer te zijn in uw dagelijks leven.",
+      "Wilt u weten wat een ClearCorrect-behandeling voor uw glimlach kan betekenen? Neem contact met ons op — wij plannen graag een consult.",
+    ]),
+  ],
+};
+
 const chirurgie: TreatmentFallback = {
   excerpt:
     "Kleine chirurgische ingrepen in en rond de mond wanneer dat nodig is voor gezondheid of als voorbereiding op verdere behandeling — met duidelijke voorlichting over verloop en herstel.",
@@ -252,6 +327,8 @@ export const treatmentFallbackBySlug: Record<string, TreatmentFallback> = {
   "frames-en-protheses": framesProtheses,
   "kronen-en-bruggen": kronenBruggen,
   chirurgie,
+  "gewoon-gaaf": gewoonGaaf,
+  "clear-correct": clearCorrect,
 };
 
 export function getTreatmentFallback(slug: string): TreatmentFallback | undefined {

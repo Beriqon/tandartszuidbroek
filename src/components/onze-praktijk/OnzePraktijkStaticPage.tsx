@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-const PRACTICE_EXTERIOR_IMAGE = "/homepagina/buitenkantzuidbroektandarts.jpg";
+const PRACTICE_EXTERIOR_IMAGE = "/homepagina/buitenkantsanadens.png";
 
 const visiePijlers = [
   {
@@ -62,37 +62,19 @@ const patientWaarden = [
 ] as const;
 
 const praktijkUren = [
-  { label: "Maandag", value: "08:00 – 17:00" },
-  { label: "Dinsdag", value: "08:00 – 17:00" },
-  { label: "Woensdag", value: "08:00 – 17:00" },
-  { label: "Donderdag", value: "08:00 – 17:00" },
-  { label: "Vrijdag", value: "08:00 – 17:00" },
-] as const;
-
-const telefoonUren = [
-  { label: "Maandag", value: "08:00 – 12:30 · 13:15 – 16:00" },
-  { label: "Dinsdag", value: "08:00 – 12:30 · 13:15 – 16:00" },
-  { label: "Woensdag", value: "08:00 – 12:30 · 13:15 – 16:00" },
-  { label: "Donderdag", value: "08:00 – 12:30 · 13:15 – 16:00" },
-  {
-    label: "Vrijdag",
-    value: "08:00 – 12:30",
-    note: "Door onderbezetting niet altijd bereikbaar.",
-  },
+  { label: "Maandag", value: "07:30 – 17:00 · 18:00 – 21:00" },
+  { label: "Dinsdag", value: "07:30 – 17:00 · 18:00 – 21:00" },
+  { label: "Woensdag", value: "07:30 – 17:00 · 18:00 – 21:00" },
+  { label: "Donderdag", value: "07:30 – 17:00" },
+  { label: "Vrijdag", value: "07:30 – 16:10" },
 ] as const;
 
 const spoedNummers = [
   {
     region: "Deventer",
-    when: "Doordeweeks ná kantooruren",
+    when: "Buiten kantooruren",
     phoneDisplay: "085 018 9466",
     phoneTel: "+31850189466",
-  },
-  {
-    region: "Apeldoorn",
-    when: "In het weekend",
-    phoneDisplay: "085 018 9462",
-    phoneTel: "+31850189462",
   },
 ] as const;
 
@@ -400,7 +382,7 @@ export function OnzePraktijkStaticPage() {
               Openingstijden & bereikbaarheid
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed">
-              Onze deuren staan op werkdagen open van 08:00 tot 17:00 uur. Telefonisch zijn we daarbinnen op vaste momenten bereikbaar — zo houden we tijd over voor de patiënten in de stoel.
+              Onze openingstijden variëren per weekdag — maandag t/m woensdag is de praktijk ook &apos;s avonds open. Telefonisch bent u tijdens kantooruren welkom.
             </p>
           </Reveal>
 
@@ -488,26 +470,9 @@ export function OnzePraktijkStaticPage() {
                   </div>
                 </header>
 
-                <dl className="relative mt-6 divide-y divide-border/60">
-                  {telefoonUren.map((row) => (
-                    <div
-                      key={row.label}
-                      className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
-                    >
-                      <dt className="text-base font-medium text-foreground sm:text-[1.0625rem]">
-                        {row.label}
-                      </dt>
-                      <dd className="font-mono text-sm tabular-nums text-foreground/85 sm:text-[0.9375rem]">
-                        {row.value}
-                      </dd>
-                      {"note" in row && row.note ? (
-                        <p className="basis-full text-xs leading-relaxed text-muted-foreground sm:basis-auto sm:max-w-[18rem] sm:text-right sm:text-[0.8125rem]">
-                          {row.note}
-                        </p>
-                      ) : null}
-                    </div>
-                  ))}
-                </dl>
+                <p className="relative mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-relaxed">
+                  {siteConfig.phoneHours}
+                </p>
 
                 <a
                   href={`tel:${siteConfig.phoneTel}`}
@@ -554,11 +519,11 @@ export function OnzePraktijkStaticPage() {
               Tandheelkundige spoed buiten openingstijden
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed">
-              Voor dringende tandheelkundige spoedgevallen buiten onze reguliere openingstijden kunt u bellen met de spoeddienst — afhankelijk van het moment.
+              Voor dringende tandheelkundige spoedgevallen buiten onze reguliere openingstijden kunt u bellen met Dental365 Spoed Tandartsen Deventer.
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6">
+          <div className="mt-10 grid max-w-xl gap-5">
             {spoedNummers.map((item, i) => (
               <Reveal key={item.region} delay={i * 0.08}>
                 <article
@@ -642,31 +607,31 @@ export function OnzePraktijkStaticPage() {
             <div className="grid gap-6 md:grid-cols-2 md:items-stretch md:gap-8">
               <div
                 className={cn(
-                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-primary px-6 py-9 text-primary-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_70%,rgb(15_23_42))] ring-1 ring-black/10 sm:px-9 sm:py-11",
+                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-cta px-6 py-9 text-cta-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_20%,rgb(15_23_42))] ring-1 ring-primary/15 sm:px-9 sm:py-11",
                   "dark:ring-white/10",
                 )}
               >
                 <div
-                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/[0.12] blur-3xl"
+                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/50 blur-3xl"
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-black/[0.12] blur-2xl"
+                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-primary/[0.06] blur-2xl"
                   aria-hidden
                 />
 
                 <div className="relative flex flex-1 flex-col gap-5 sm:flex-row sm:gap-6">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-foreground/15 text-primary-foreground shadow-inner ring-1 ring-primary-foreground/20 sm:size-14">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/14 text-primary shadow-inner ring-1 ring-primary/15 sm:size-14">
                     <UserPlus className="size-6 sm:size-7" strokeWidth={2} aria-hidden />
                   </span>
                   <div className="min-w-0 space-y-3">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary-foreground/75">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary/85">
                       Nieuwe patiënten welkom
                     </p>
                     <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl sm:leading-tight">
                       Wilt u zich bij ons inschrijven?
                     </h2>
-                    <p className="max-w-prose text-base leading-relaxed text-primary-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
+                    <p className="max-w-prose text-base leading-relaxed text-cta-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
                       Dat kan eenvoudig via deze website, of bel ons op{" "}
                       <a
                         href={`tel:${siteConfig.phoneTel}`}

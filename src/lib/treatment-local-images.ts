@@ -13,6 +13,8 @@ export const TREATMENT_LOCAL_IMAGE_BY_SLUG: Readonly<Record<string, string>> = {
   "frames-en-protheses": "/behandelingen/framesenprotheses.jpg",
   "kronen-en-bruggen": "/behandelingen/kronenenbruggen.png",
   "chirurgie": "/behandelingen/chirurgie.png",
+  "gewoon-gaaf": "/behandelingen/mondhygieneenpreventie.png",
+  "clear-correct": "/behandelingen/estetischetandheelkunde.png",
 } as const;
 
 export function treatmentLocalImageSrc(

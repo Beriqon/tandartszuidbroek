@@ -16,24 +16,15 @@ import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 const DENTAL365_URL_DEVENTER = "https://dental365.nl/spoed-tandarts/deventer/";
-const DENTAL365_URL_APELDOORN = "https://dental365.nl/spoed-tandarts/apeldoorn/";
 
 const waarneemNummers = [
   {
     region: "Deventer",
-    when: "Doordeweeks na kantooruren",
+    when: "Buiten kantooruren",
     phoneDisplay: "085 018 9466",
     phoneTel: "+31850189466",
     href: DENTAL365_URL_DEVENTER,
     linkLabel: "Dental365 Deventer",
-  },
-  {
-    region: "Apeldoorn",
-    when: "In het weekend",
-    phoneDisplay: "085 018 9462",
-    phoneTel: "+31850189462",
-    href: DENTAL365_URL_APELDOORN,
-    linkLabel: "Dental365 Apeldoorn",
   },
 ] as const;
 
@@ -130,8 +121,9 @@ export function SpoeddienstStaticPage() {
                   Wij doen ons best om u nog dezelfde dag te helpen.
                 </p>
                 <p className="mt-3 text-lg leading-relaxed text-muted-foreground sm:mt-4 sm:text-xl sm:leading-relaxed">
-                  Buiten onze reguliere openingstijden (maandag t/m vrijdag, 08.00–17.00 uur) kunt u
-                  terecht bij de waarneemdienst. Voor reparatie van een prothese gelden aparte tijden;
+                  Buiten onze reguliere openingstijden kunt u terecht bij Dental365 Spoed Tandartsen
+                  Deventer ({waarneemNummers[0].phoneDisplay}). Tijdens kantooruren? Bel de praktijk op{" "}
+                  {siteConfig.phoneDisplay}. Voor reparatie van een prothese gelden aparte tijden;
                   die vindt u verderop op deze pagina.
                 </p>
               </Reveal>
@@ -209,12 +201,12 @@ export function SpoeddienstStaticPage() {
               Samenwerking met Dental365 Spoed Tandartsen
             </h2>
             <p className="mt-3 text-lg leading-relaxed text-muted-foreground sm:text-xl sm:leading-relaxed">
-              Wij werken samen met Dental365 Spoed Tandartsen. Kies het nummer dat bij uw situatie
-              past.
+              Wij werken samen met Dental365 Spoed Tandartsen. Buiten kantooruren belt u met
+              Deventer.
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6">
+          <div className="mt-10 grid max-w-xl gap-5">
             {waarneemNummers.map((item, i) => (
               <Reveal key={item.region} delay={i * 0.06}>
                 <article
@@ -363,12 +355,12 @@ export function SpoeddienstStaticPage() {
             <div className="grid gap-6 md:grid-cols-2 md:items-stretch md:gap-8">
               <div
                 className={cn(
-                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-primary px-6 py-9 text-primary-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_70%,rgb(15_23_42))] ring-1 ring-black/10 sm:px-9 sm:py-11",
+                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-cta px-6 py-9 text-cta-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_20%,rgb(15_23_42))] ring-1 ring-primary/15 sm:px-9 sm:py-11",
                   "dark:ring-white/10",
                 )}
               >
                 <div
-                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/[0.12] blur-3xl"
+                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/50 blur-3xl"
                   aria-hidden
                 />
                 <div className="relative flex flex-1 flex-col gap-5 sm:flex-row sm:gap-6">
@@ -376,13 +368,13 @@ export function SpoeddienstStaticPage() {
                     <Phone className="size-6 sm:size-7" strokeWidth={2} aria-hidden />
                   </span>
                   <div className="min-w-0 space-y-3">
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary-foreground/75">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-primary/85">
                       {siteConfig.name}
                     </p>
                     <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl sm:leading-tight">
                       Spoed tijdens openingstijden
                     </h2>
-                    <p className="max-w-prose text-base leading-relaxed text-primary-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
+                    <p className="max-w-prose text-base leading-relaxed text-cta-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
                       Bel ons op{" "}
                       <a
                         href={`tel:${siteConfig.phoneTel}`}

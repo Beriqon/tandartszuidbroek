@@ -388,21 +388,21 @@ export function KwaliteitKlachtenStaticPage() {
             <div className="grid gap-6 md:grid-cols-2 md:items-stretch md:gap-8">
               <div
                 className={cn(
-                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-primary px-6 py-9 text-primary-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_70%,rgb(15_23_42))] ring-1 ring-black/10 sm:px-9 sm:py-11",
+                  "relative flex min-h-0 flex-col justify-between gap-8 overflow-hidden rounded-3xl bg-cta px-6 py-9 text-cta-foreground shadow-[0_28px_64px_-28px_color-mix(in_oklab,var(--color-primary)_20%,rgb(15_23_42))] ring-1 ring-primary/15 sm:px-9 sm:py-11",
                   "dark:ring-white/10",
                 )}
               >
                 <div
-                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/[0.12] blur-3xl"
+                  className="pointer-events-none absolute -right-12 -top-16 size-[18rem] rounded-full bg-white/50 blur-3xl"
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-black/[0.12] blur-2xl"
+                  className="pointer-events-none absolute -bottom-20 -left-10 size-[14rem] rounded-full bg-primary/[0.06] blur-2xl"
                   aria-hidden
                 />
 
                 <div className="relative flex flex-1 flex-col gap-5 sm:flex-row sm:gap-6">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-foreground/15 text-primary-foreground shadow-inner ring-1 ring-primary-foreground/20 sm:size-14">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/14 text-primary shadow-inner ring-1 ring-primary/15 sm:size-14">
                     <Shield className="size-6 sm:size-7" strokeWidth={2} aria-hidden />
                   </span>
                   <div className="min-w-0 space-y-3">
@@ -412,7 +412,7 @@ export function KwaliteitKlachtenStaticPage() {
                     <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl sm:leading-tight">
                       Liever direct met ons overleggen?
                     </h2>
-                    <p className="max-w-prose text-base leading-relaxed text-primary-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
+                    <p className="max-w-prose text-base leading-relaxed text-cta-foreground/88 sm:text-[1.0625rem] sm:leading-relaxed">
                       Een open gesprek in de praktijk helpt vaak het snelst. Neem contact op of vraag
                       uw volgende afspraak om het persoonlijk te bespreken.
                     </p>
