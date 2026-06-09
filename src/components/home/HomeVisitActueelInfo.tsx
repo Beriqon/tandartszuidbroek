@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Briefcase, ChevronRight } from "lucide-react";
 
+import type { GeslotenItem } from "@/content/praktijk-nieuws";
 import { praktijkNieuws } from "@/content/praktijk-nieuws";
 import { getOpenVacatures } from "@/content/vacatures";
 import { cn } from "@/lib/utils";
 
-function formatSluiting(item: (typeof praktijkNieuws.aangepasteOpeningstijden.gesloten)[number]) {
+function formatSluiting(item: GeslotenItem) {
   const suffix = item.omschrijving ?? item.details ?? "";
   return suffix ? `${item.datum} — ${suffix}` : item.datum;
 }

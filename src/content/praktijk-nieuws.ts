@@ -5,7 +5,7 @@
 
 export type SluitingType = "gesloten" | "gedeeltelijk";
 
-export type AangepasteOpeningstijd = {
+export type GeslotenItem = {
   id: string;
   /** Weergavetekst, bijv. "Donderdag 14 mei 2026" */
   datum: string;
@@ -15,6 +15,8 @@ export type AangepasteOpeningstijd = {
   details?: string;
   type: SluitingType;
 };
+
+export type AangepasteOpeningstijd = GeslotenItem;
 
 export const praktijkNieuws = {
   /** IDs uit `vacatures.ts` die momenteel open staan. */
@@ -40,7 +42,7 @@ export const praktijkNieuws = {
         omschrijving: "Eerste Kerstdag",
         type: "gesloten",
       },
-    ],
+    ] satisfies readonly GeslotenItem[],
     bijzonderheden: [
       {
         id: "sep-2026-middag",
@@ -53,6 +55,6 @@ export const praktijkNieuws = {
         datum: "Donderdag 24 december 2026 t/m vrijdag 1 januari 2027",
         type: "gedeeltelijk",
       },
-    ],
+    ] satisfies readonly GeslotenItem[],
   },
-} as const;
+};
